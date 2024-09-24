@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#082E33"
+    tools:context=".LooginFragment">
+
+    <EditText
+        android:id="@+id/emailEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Your Email"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center"
+        android:background="@drawable/et"
+        android:padding="10dp"
+        android:fontFamily="@font/adamina"
+        android:textSize="21sp"
+        android:textStyle="bold"/>
+
+
+
+    <EditText
+        android:id="@+id/passEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Your Password"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:inputType="textPassword"
+        android:background="@drawable/et"
+        android:fontFamily="@font/adamina"
+        android:padding="10dp"
+        android:textSize="21sp"
+        android:textStyle="bold"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/loginBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="login"
+        android:textAlignment="center"
+        android:background="@drawable/bt"
+        android:fontFamily="@font/adamina"
+        android:layout_marginTop="60dp"
+        android:padding="10dp"
+        android:textSize="21sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/forgetTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+     android:text="Forget Password"
+        android:layout_marginTop="10dp"
+        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+        android:textColor="#237781"
+        android:fontFamily="@font/adamina"
+        android:textStyle="bold"
+        android:textSize="21sp"/>
+
+    <TextView
+        android:id="@+id/creatTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/adamina"
+        android:hint="Creat New Account"
+        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+        android:textAlignment="center"
+        android:textColor="#237781"
+        android:textSize="21sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

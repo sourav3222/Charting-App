@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/looginFragment">
+
+    <fragment
+        android:id="@+id/looginFragment"
+        android:name="com.example.aloconna.LooginFragment"
+        android:label="fragment_loogin"
+        tools:layout="@layout/fragment_loogin" >
+        <action
+            android:id="@+id/action_looginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.aloconna.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/singinFragment"
+        android:name="com.example.aloconna.singinFragment"
+        android:label="fragment_singin"
+        tools:layout="@layout/fragment_singin" />
+</navigation>
