@@ -37,6 +37,19 @@
         android:textSize="21sp"
         android:textStyle="bold"/>
 
+    <TextView
+        android:id="@+id/forgetTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forget Password"
+        android:layout_gravity="start"
+        android:layout_marginTop="10dp"
+        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+        android:textColor="#237781"
+        android:fontFamily="@font/adamina"
+        android:textStyle="bold"
+        android:textSize="21sp"/>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/loginBTN"
         android:layout_width="match_parent"
@@ -50,17 +63,6 @@
         android:textSize="21sp"
         android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/forgetTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-     android:text="Forget Password"
-        android:layout_marginTop="10dp"
-        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-        android:textColor="#237781"
-        android:fontFamily="@font/adamina"
-        android:textStyle="bold"
-        android:textSize="21sp"/>
 
     <TextView
         android:id="@+id/creatTV"
