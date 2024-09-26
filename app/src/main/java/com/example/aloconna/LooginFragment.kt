@@ -12,9 +12,12 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.aloconna.databinding.FragmentLooginBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class LooginFragment : Fragment() {
     lateinit var binding: FragmentLooginBinding
+
+    lateinit var firebaseUser: FirebaseUser
 
 
     override fun onCreateView(
@@ -23,6 +26,12 @@ class LooginFragment : Fragment() {
     ): View? {
         binding = FragmentLooginBinding.inflate(inflater,container,false)
 
+        FirebaseAuth.getInstance().currentUser?.let {
+
+            firebaseUser = it
+
+            findNavController().navigate(R.id.action_looginFragment_to_homeFragment)
+        }
 
         binding.loginBTN.setOnClickListener {
             val email = binding.emailEt.text.toString().trim()
@@ -38,6 +47,9 @@ class LooginFragment : Fragment() {
         }
 
 
+        binding.creatTV.setOnClickListener{
+            findNavController().navigate(R.id.action_looginFragment_to_singinFragment)
+        }
 
 
 
@@ -60,6 +72,7 @@ class LooginFragment : Fragment() {
                 Toast.makeText(requireContext(),"${task.exception?.message}",Toast.LENGTH_LONG).show()
             }
             findNavController().navigate(R.id.action_looginFragment_to_homeFragment)
+
         }
 
 

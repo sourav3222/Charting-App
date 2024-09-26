@@ -1,59 +1,71 @@
 package com.example.aloconna
 
 import android.os.Bundle
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import com.example.aloconna.databinding.FragmentSinginBinding
+import com.google.firebase.auth.FirebaseAuth
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [singinFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class singinFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    lateinit var binding: FragmentSinginBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_singin, container, false)
+        binding   = FragmentSinginBinding.inflate(inflater,container,false)
+
+        binding.singInBTN.setOnClickListener {
+            val email = binding.emailEt.text.toString().trim()
+            val password  = binding.passEt.text.toString().trim()
+            val user = binding.userEt.text.toString().trim()
+
+
+            if (isEmailValid(email) && isPasswordValid(password)){
+
+                singInuser(email,password,user)
+            }else{
+                Toast.makeText(requireContext(),"INVALID EMAIL AND PASSWORD",Toast.LENGTH_LONG).show()
+            }
+        }
+
+
+
+
+
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment singinFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            singinFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun singInuser(email: String, password: String, user: String) {
+
+        val auth = FirebaseAuth.getInstance()
+        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener{task->
+            if (task.isSuccessful){
+                Toast.makeText(requireContext(),"Creat Account Successfully",Toast.LENGTH_LONG).show()
+                findNavController().navigate(R.id.action_singinFragment_to_looginFragment)
+            }else{
+                Toast.makeText(requireContext(),"${task.exception?.message}",Toast.LENGTH_LONG).show()
             }
+
+
+
+
+        }
     }
+
+    fun isEmailValid (email: String):Boolean{
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+    fun isPasswordValid (password: String): Boolean{
+        return password.length>=6
+    }
+
 }

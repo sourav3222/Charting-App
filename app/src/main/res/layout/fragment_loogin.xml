@@ -8,6 +8,12 @@
     android:background="#082E33"
     tools:context=".LooginFragment">
 
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/logo"/>
+
+
     <EditText
         android:id="@+id/emailEt"
         android:layout_width="match_parent"
