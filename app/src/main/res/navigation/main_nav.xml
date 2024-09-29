@@ -35,4 +35,9 @@
             android:id="@+id/action_singinFragment_to_looginFragment"
             app:destination="@id/looginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.aloconna.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

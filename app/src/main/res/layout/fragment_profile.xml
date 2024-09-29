@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".ProfileFragment">
+
+
+
+    <ImageView
+        android:id="@+id/profileIV"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/sourav" />
+
+    <TextView
+        android:id="@+id/fullName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Sourav Ram"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/emailTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="ramsourav82@gmail.com"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
+
+
+    <TextView
+        android:id="@+id/bioTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/my_bio"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
+
+    <Button
+        android:id="@+id/letsChatBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Lets Chat" />
+
+
+</LinearLayout>
