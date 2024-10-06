@@ -12,6 +12,7 @@ class UserAdapter(var itemClick: ItemClick) : ListAdapter<User,UserViewHolder>(c
 
     interface ItemClick{
         fun onItemclick(user: User)
+
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return  UserViewHolder(ProfileItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))

@@ -10,11 +10,14 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.aloconna.databinding.FragmentSinginBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 
 class singinFragment : Fragment() {
     lateinit var binding: FragmentSinginBinding
 
+    lateinit var userDB : DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,6 +25,7 @@ class singinFragment : Fragment() {
     ): View? {
         binding   = FragmentSinginBinding.inflate(inflater,container,false)
 
+        userDB = FirebaseDatabase.getInstance().reference
         binding.singInBTN.setOnClickListener {
             val email = binding.emailEt.text.toString().trim()
             val password  = binding.passEt.text.toString().trim()
@@ -49,8 +53,10 @@ class singinFragment : Fragment() {
         val auth = FirebaseAuth.getInstance()
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener{task->
             if (task.isSuccessful){
+
+                saveUserToDatabase(auth.currentUser?.uid,email,user)
                 Toast.makeText(requireContext(),"Creat Account Successfully",Toast.LENGTH_LONG).show()
-                findNavController().navigate(R.id.action_singinFragment_to_looginFragment)
+
             }else{
                 Toast.makeText(requireContext(),"${task.exception?.message}",Toast.LENGTH_LONG).show()
             }
@@ -60,6 +66,31 @@ class singinFragment : Fragment() {
 
         }
     }
+
+    private fun saveUserToDatabase(uid: String?, email: String, user: String) {
+
+
+        uid?.let {
+
+            val user= User(userId = uid,email=email, fullName = user)
+
+            userDB.child(DBNODES.USER).child(it).setValue(user).addOnCompleteListener {task->
+
+
+                if (task.isSuccessful){
+
+
+                    Toast.makeText(requireContext(),"Creat Account Successfully",Toast.LENGTH_LONG).show()
+                    findNavController().navigate(R.id.action_singinFragment_to_looginFragment)
+                }else{
+                    Toast.makeText(requireContext(),"${task.exception?.message}",Toast.LENGTH_LONG).show()
+                }
+            }
+
+        }
+
+    }
+
 
     fun isEmailValid (email: String):Boolean{
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
