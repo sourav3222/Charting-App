@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.aloconna.databinding.FragmentProfileBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -16,7 +18,9 @@ import com.google.firebase.database.getValue
 class ProfileFragment : Fragment() {
     lateinit var binding: FragmentProfileBinding
     lateinit var userDB : DatabaseReference
+    private var userId = ""
 
+    private var bundle = Bundle()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +33,29 @@ class ProfileFragment : Fragment() {
 
         requireArguments().getString("id")?.let {
 
+            userId = it
             getUserById(it)
+
+        }
+        FirebaseAuth.getInstance().currentUser?.let {
+
+            if (it.uid == userId){
+
+                binding.letsChatBtn.text = EDIT
+
+            }else{
+                binding.letsChatBtn.text = CHAT
+            }
+
+        }
+
+        binding.letsChatBtn.setOnClickListener {
+
+            if (binding.letsChatBtn.text == EDIT){
+                bundle.putString(USERID,userId)
+            findNavController().navigate(R.id.action_profileFragment_to_profileEditFragment,bundle)
+
+            }
 
         }
 
@@ -37,7 +63,18 @@ class ProfileFragment : Fragment() {
 
 
 
+
+
         return binding.root
+    }
+
+    companion object{
+
+
+        private var EDIT = "Lets Edit"
+        private var CHAT = "Lets Chat"
+        private var USERID = "id"
+
     }
 
     private fun getUserById(userId: String) {
