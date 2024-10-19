@@ -84,7 +84,7 @@ class HomeFragment : Fragment(),UserAdapter.ItemClick {
                     } else {
                         currentUser = user
 
-                       setProfile()
+      //                 setProfile()
 
                     }
 
@@ -101,12 +101,12 @@ class HomeFragment : Fragment(),UserAdapter.ItemClick {
         })
 
     }
-    private fun setProfile() {
-       currentUser?.let {
+   // private fun setProfile() {
+     //  currentUser?.let {
 
-           binding.profileTV.load("https://www.google.com/imgres?q=sadek%20bhuiya%20shimon&imgurl=https%3A%2F%2Flookaside.fbsbx.com%2Flookaside%2Fcrawler%2Fmedia%2F%3Fmedia_id%3D492760747028449&imgrefurl=https%3A%2F%2Fm.facebook.com%2F100088835840260&docid=59WDNV_ROTIDAM&tbnid=oIcxOx9tCECHkM&vet=12ahUKEwit-vOChIGJAxW38zgGHeLEAFgQM3oECEkQAA..i&w=1536&h=2048&hcb=2&itg=1&ved=2ahUKEwit-vOChIGJAxW38zgGHeLEAFgQM3oECEkQAA")
-        }
-    }
+       //    binding.profileTV.load("https://www.google.com/imgres?q=sadek%20bhuiya%20shimon&imgurl=https%3A%2F%2Flookaside.fbsbx.com%2Flookaside%2Fcrawler%2Fmedia%2F%3Fmedia_id%3D492760747028449&imgrefurl=https%3A%2F%2Fm.facebook.com%2F100088835840260&docid=59WDNV_ROTIDAM&tbnid=oIcxOx9tCECHkM&vet=12ahUKEwit-vOChIGJAxW38zgGHeLEAFgQM3oECEkQAA..i&w=1536&h=2048&hcb=2&itg=1&ved=2ahUKEwit-vOChIGJAxW38zgGHeLEAFgQM3oECEkQAA")
+        //}
+    //}
 
 
     override fun onItemclick(user: User) {
