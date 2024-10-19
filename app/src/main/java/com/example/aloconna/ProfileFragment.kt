@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import coil.load
 import com.example.aloconna.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -87,6 +88,8 @@ class ProfileFragment : Fragment() {
                         fullName.text = it.fullName
                         bioTV.text = it.bio
                         emailTV.text = it.email
+                        profileIV.load(it.profilePic)
+
 
 
                     }

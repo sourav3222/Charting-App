@@ -86,6 +86,8 @@ class HomeFragment : Fragment(),UserAdapter.ItemClick {
 
       //                 setProfile()
 
+                        binding.profileTV.load(user.profilePic)
+
                     }
 
 

@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import coil.load
 import com.example.aloconna.databinding.FragmentProfileEditBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.database.DataSnapshot
@@ -17,6 +18,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
 
@@ -45,6 +47,9 @@ class ProfileEditFragment : Fragment() {
 
         userDB = FirebaseDatabase.getInstance().reference
 
+        userStorage = FirebaseStorage.getInstance().reference
+
+
 
 
 
@@ -58,6 +63,13 @@ class ProfileEditFragment : Fragment() {
 
 
         binding.saveBtn.setOnClickListener {
+
+            if (isProfileClicked && userProfileUri != null) {
+
+                uploadImage(userProfileUri)
+
+            }
+
 
             var userMap : MutableMap<String,Any> = mutableMapOf()
 
@@ -85,6 +97,52 @@ class ProfileEditFragment : Fragment() {
         pickProfileImage()
 
         return binding.root
+    }
+
+    private fun uploadImage(userProfileUri: Uri) {
+        var profileStorage : StorageReference = userStorage.child("Upload").child(userId).child("profile-Image")
+        profileStorage.putFile(userProfileUri).addOnCompleteListener {
+            if (it.isSuccessful) {
+
+                profileStorage.downloadUrl.addOnSuccessListener { data ->
+
+                    imageLink = data.toString()
+
+                    profileUpdateWithImage(imageLink)
+
+                    Toast.makeText(
+                        requireContext(),
+                        "Image Upload Successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                }
+            }
+        }
+
+    }
+
+    private fun profileUpdateWithImage(imageLink: String) {
+
+
+        var userMap : MutableMap<String,Any> = mutableMapOf()
+
+        userMap["fullName"] = binding.fullName.text.toString().trim()
+        userMap["bio"] = binding.bioTV.text.toString().trim()
+        userMap["profilePic"] = imageLink
+
+
+
+        userDB.child(DBNODES.USER).child(userId).updateChildren(userMap).addOnCompleteListener { task ->
+
+            if (task.isSuccessful) {
+                Toast.makeText(requireContext(), "Successfully Updated", Toast.LENGTH_SHORT).show()
+
+            } else {
+                Toast.makeText(requireContext(), "${task.exception?.message}", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
     }
 
     private fun pickProfileImage() {
@@ -143,6 +201,7 @@ class ProfileEditFragment : Fragment() {
 
                             fullName.setText( it.fullName)
                             bioTV.setText(it.bio)
+                            profileIV.load(it.profilePic)
                         }
 
                     }
