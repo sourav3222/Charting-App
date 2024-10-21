@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_profileFragment_to_profileEditFragment"
             app:destination="@id/profileEditFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_chartFragment"
+            app:destination="@id/chartFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileEditFragment"

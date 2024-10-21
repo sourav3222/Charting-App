@@ -11,6 +11,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import coil.load
+import com.bumptech.glide.Glide
 import com.example.aloconna.databinding.FragmentProfileEditBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.database.DataSnapshot
@@ -201,7 +202,9 @@ class ProfileEditFragment : Fragment() {
 
                             fullName.setText( it.fullName)
                             bioTV.setText(it.bio)
-                            profileIV.load(it.profilePic)
+                            Glide.with(requireContext()).load(it.profilePic).placeholder(R.drawable.playholder)
+                                .into(profileIV)
+
                         }
 
                     }

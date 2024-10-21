@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import coil.load
+import com.bumptech.glide.Glide
 import com.example.aloconna.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -51,10 +52,13 @@ class ProfileFragment : Fragment() {
         }
 
         binding.letsChatBtn.setOnClickListener {
-
+            bundle.putString(USERID,userId)
             if (binding.letsChatBtn.text == EDIT){
-                bundle.putString(USERID,userId)
+
             findNavController().navigate(R.id.action_profileFragment_to_profileEditFragment,bundle)
+
+            }else{
+                findNavController().navigate(R.id.action_profileFragment_to_chartFragment,bundle)
 
             }
 
@@ -88,7 +92,8 @@ class ProfileFragment : Fragment() {
                         fullName.text = it.fullName
                         bioTV.text = it.bio
                         emailTV.text = it.email
-                        profileIV.load(it.profilePic)
+                        Glide.with(requireContext()).load(it.profilePic).placeholder(R.drawable.playholder)
+                            .into(profileIV)
 
 
 
