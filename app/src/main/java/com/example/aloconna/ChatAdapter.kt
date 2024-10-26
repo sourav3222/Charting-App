@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-class ChatAdapter(var  userIdSelf: String): ListAdapter<TextMessage, chatViewHolder>(comparator) {
+class ChatAdapter(private var  userIdSelf: String,private val chatList: MutableList<TextMessage> ):
+
+RecyclerView.Adapter<chatViewHolder> ()  {
 
 
-    val chatList = mutableListOf<TextMessage>()
+
 
     var Right = 1
     var Left = 2
@@ -30,21 +32,25 @@ class ChatAdapter(var  userIdSelf: String): ListAdapter<TextMessage, chatViewHol
     }
 
     override fun onBindViewHolder(holder: chatViewHolder, position: Int) {
-        getItem(position).apply {
+       val message = chatList[position]
+            holder.messageTV.text = message.text
 
-            chatList.add(this)
-            holder.messageTV.text = this.text
-        }
 
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (chatList[position].sanderId == userIdSelf){
+        return if (chatList[position].sanderId == userIdSelf){
 
-            return Right
+            Right
         }else{
-            return Left
+            Left
         }
+    }
+
+    override fun getItemCount(): Int {
+
+        return chatList.size
+
     }
 
     companion object{

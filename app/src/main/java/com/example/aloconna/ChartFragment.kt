@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.aloconna.databinding.FragmentChartBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -37,9 +40,18 @@ class ChartFragment : Fragment() {
 
         chatDB= FirebaseDatabase.getInstance().reference
 
+        val Layoutmanager = LinearLayoutManager(requireContext())
+
+        Layoutmanager.stackFromEnd = true
+
+        binding.messageRCV.layoutManager = Layoutmanager
+
 
         requireArguments().getString(USERID)?.let {
             userIdRemote = it
+        }
+        binding.backBtn.setOnClickListener{
+            findNavController().navigate(R.id.action_chartFragment_to_homeFragment)
         }
 
 
@@ -68,7 +80,7 @@ class ChartFragment : Fragment() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+
             }
 
 
@@ -102,8 +114,8 @@ class ChartFragment : Fragment() {
 
 
                 }
-                var adapter =  ChatAdapter(userIdSelf)
-                adapter.submitList(chatList)
+                var adapter =  ChatAdapter(userIdSelf,chatList)
+
 
                 binding.messageRCV.adapter = adapter
 

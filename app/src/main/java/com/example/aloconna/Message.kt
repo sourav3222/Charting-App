@@ -12,9 +12,9 @@ interface Message{
 
 data class TextMessage(
     val text : String? = null,
-    override var msgId: String,
-    override val sanderId: String,
-    override val receiver: String
+    override var msgId: String="",
+    override val sanderId: String="",
+    override val receiver: String=""
 ):Message
 
 data class MessagewithImage(
