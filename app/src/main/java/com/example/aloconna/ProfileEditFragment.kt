@@ -191,7 +191,7 @@ class ProfileEditFragment : Fragment() {
 
 
 
-    private fun getUSerById(it: String) {
+ private  fun getUSerById(it: String) {
 
         userDB.child(DBNODES.USER).child(userId).addValueEventListener(
             object  : ValueEventListener {
@@ -211,7 +211,7 @@ class ProfileEditFragment : Fragment() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+
                 }
 
 
